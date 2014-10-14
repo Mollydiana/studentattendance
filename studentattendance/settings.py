@@ -10,6 +10,9 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import attendance
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -27,16 +30,18 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+
 # Application definition
 
 INSTALLED_APPS = (
+    'attendance',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'attendance'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,6 +58,7 @@ ROOT_URLCONF = 'studentattendance.urls'
 
 WSGI_APPLICATION = 'studentattendance.wsgi.application'
 
+AUTH_USER_MODEL = 'attendance.Person'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
