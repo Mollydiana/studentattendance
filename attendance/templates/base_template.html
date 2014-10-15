@@ -13,11 +13,13 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
+    <link href='http://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
+
     <!-- Optional theme -->
     {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">#}
 
     <!-- Custom styles for this template -->
-    {#    <link href="{% static 'jumbotron-narrow.css' %}" rel="stylesheet">#}
+        <link href="{% static 'jumbotron-narrow.css' %}" rel="stylesheet">
 
 
     <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
@@ -33,7 +35,7 @@
     <![endif]-->
 </head>
 
-<body>
+<body style="background-image: url(http://edtosavetheworld.files.wordpress.com/2013/03/bored-classroom.jpg)">
 
 <div class="container">
     <div class="row">
@@ -52,7 +54,7 @@
             <div class="jumbotron" style="padding-bottom: 150px;">
 
 
-                <h1 class="text-center">Welcome!</h1>
+                <h1 class="text-center" style="font-family: 'Coming Soon', cursive;">Welcome!</h1>
 
 
                 <hr>
@@ -68,15 +70,17 @@
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                             <li role="presentation"><a role="menuitem" tabindex="-1" data-target="#" href="{% url 'login' %}">Student</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" data-target="#" href={% url 'login' %}>Teacher</a></li>
+
                         </ul>
                     </div>
-                </div>
-            </div>
+                    <div class="row">
+                     <p class="text-center text-muted" style="font-size: 13px; padding-top: 10px; ">Not registered? <a href="{% url 'register' %}"><br>What are you waiting for?</a></p>
+                    </div>
+
+
         </div>
     <div>
-        <div class="row">
-            <p>Not registered? <a href="{% url 'register' %}">What are you waiting for?</a></p>
-        </div>
+
     </div>
     </div>
     <div class="row" style="position: absolute; bottom: 0;">
@@ -91,4 +95,5 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
+
 </html>

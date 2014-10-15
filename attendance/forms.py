@@ -2,7 +2,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from attendance.models import Person
 
-__author__ = 'danielsiker'
 
 class EmailUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
