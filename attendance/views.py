@@ -15,6 +15,9 @@ from attendance.models import Person
 def home(request):
     return render(request, 'home.html')
 
+def profile(request):
+    return render(request, 'profile.html')
+
 
 @login_required
 def student(request):
@@ -64,3 +67,6 @@ def register(request):
     return render(request, "registration/register.html", {
         'form': form,
     })
+
+
+

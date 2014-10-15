@@ -21,5 +21,6 @@ urlpatterns = patterns('',
     # home/student/teacher urls
     url(r'^student$', 'attendance.views.student', name='student'),
     url(r'^teacher$', 'attendance.views.teacher', name='teacher'),
+    url(r'^profile$', 'attendance.views.profile', name='profile')
 
 )
