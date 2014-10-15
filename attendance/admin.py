@@ -1,3 +1,5 @@
 from django.contrib import admin
+from attendance.models import Person, CheckIn
 
-# Register your models here.
+admin.site.register(Person)
+admin.site.register(CheckIn)

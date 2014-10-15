@@ -1,10 +1,23 @@
-{#{% extends "home.html" %}#}
+{% extends "base_template.html" %}
 
 {% block content %}
-   <form method="post" action=""> {# dot specifies 'submit to the same url', not necessary (same as default, but more explicit#}
-        {% csrf_token %}
-        {{ form.as_p }}
+       <div class="row" style="margin-top: 200px;">
 
-        <input type="submit" value="Submit">
-    </form>
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="jumbotron" style="padding-bottom: 40px; font-size: 18px;">
+
+                <input type="hidden" name="next" value="{{ teacher }}"/>
+                <form method="post" action=""> {# dot specifies 'submit to the same url', not necessary (same as default, but more explicit#}
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <input style="font-size: 24px;" type="submit" value="Submit">
+                </form>
+                <br>
+                <p class="text-center">Already Registered? <a href="{% url 'login' %}">Login!</a></p>
+
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
