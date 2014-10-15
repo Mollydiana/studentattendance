@@ -54,7 +54,7 @@ def register(request):
             # msg = EmailMultiAlternatives("Welcome!", text_content, settings.DEFAULT_FROM_EMAIL, [user.email])
             # msg.attach_alternative(html_content, "text/html")
             # msg.send()
-            if Person.teacher:
+            if user.teacher:
                 return redirect("teacher")
             else:
                 return redirect("student")

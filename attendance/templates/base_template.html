@@ -38,17 +38,17 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-lg-10">
+        <div class="col-lg-12">
 
         <ul class="nav nav-pills navbar-left">
 
             <h3 class="text-muted">Student Attendance</h3>
         </ul>
     </div>
-
+{% block content %}
     <div class="row" style="margin-top: 200px;">
 
-        <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-sm-8 col-sm-offset-2">
             <div class="jumbotron" style="padding-bottom: 150px;">
 
 
@@ -79,6 +79,7 @@
         </div>
     </div>
     </div>
+        {% endblock %}
     <div class="row" style="position: absolute; bottom: 0;">
         <div class="footer">
             <p class="text-center">&copy; ZJM 2014</p>
