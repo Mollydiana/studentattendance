@@ -52,6 +52,8 @@ docs/_build/
 
 # PyBuilder
 target/
-.idea
+
 *.pyc
-venv/*
+.idea/
+local_settings.py
+venv
