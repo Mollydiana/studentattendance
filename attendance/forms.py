@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from attendance.models import Person
 
 __author__ = 'danielsiker'
 
@@ -8,7 +9,7 @@ class EmailUserCreationForm(UserCreationForm):
 
     class Meta:
         model = Person
-        fields = ("first_name", "last_name", "username", "email", "password1", "password2", "phone")
+        fields = ("first_name", "last_name", "username", "email", "password1", "password2", "teacher")
         # inherits from usercreation form to check passwords, validation, etc
 
     def clean_username(self):

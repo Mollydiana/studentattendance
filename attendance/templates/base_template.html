@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Student Attendance</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">#}
+
+    <!-- Custom styles for this template -->
+    {#    <link href="{% static 'jumbotron-narrow.css' %}" rel="stylesheet">#}
+
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-10">
+
+        <ul class="nav nav-pills navbar-left">
+
+            <h3 class="text-muted">Student Attendance</h3>
+        </ul>
+    </div>
+
+    <div class="row" style="margin-top: 200px;">
+
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="jumbotron" style="padding-bottom: 150px;">
+
+
+                <h1 class="text-center">Welcome!</h1>
+
+
+                <hr>
+                <br>
+
+                <div class="col-sm-4 col-sm-offset-4">
+                    <div class="dropdown">
+                        <button class="btn btn-danger btn-lg dropdown-toggle" type="button" id="dropdownMenu1"
+                                data-toggle="dropdown">
+                            I am a
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" data-target="#" href="{% url 'login' %}">Student</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" data-target="#" href={% url 'login' %}>Teacher</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div>
+        <div class="row">
+            <p>Not registered? <a href="{% url 'register' %}">What are you waiting for?</a></p>
+        </div>
+    </div>
+    </div>
+    <div class="row" style="position: absolute; bottom: 0;">
+        <div class="footer">
+            <p class="text-center">&copy; ZJM 2014</p>
+        </div>
+    </div>
+</div>
+</div>
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

@@ -3,13 +3,13 @@ from django.contrib import admin
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'studentattendance.views.home', name='home'),
+    url(r'^$', 'attendance.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
 
     # registration
-     url(r'^register/$', 'attendance.views.register', name='register'),
+    url(r'^register/$', 'attendance.views.register', name='register'),
     url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
     url(r'^password_reset/$', 'django.contrib.auth.views.password_reset', name='password_reset'),  #user enters email for account they want to reset
     url(r'^password_reset/done/$', 'django.contrib.auth.views.password_reset_done', name='password_reset_done'), #user redirected to email sent page
@@ -19,4 +19,7 @@ urlpatterns = patterns('',
     url(r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete', name='password_reset_complete'), #your password has been reset page
 
     # home/student/teacher urls
+    url(r'^student$', 'attendance.views.student', name='student'),
+    url(r'^teacher$', 'attendance.views.teacher', name='teacher'),
+
 )
