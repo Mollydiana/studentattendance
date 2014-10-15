@@ -47,14 +47,14 @@
             <h3 class="text-muted">Student Attendance</h3>
         </ul>
     </div>
-
+{% block content %}
     <div class="row" style="margin-top: 200px;">
 
         <div class="col-sm-6 col-sm-offset-3">
             <div class="jumbotron" style="padding-bottom: 150px;">
 
 
-                <h1 class="text-center" style="font-family: 'Coming Soon', cursive;">Welcome!</h1>
+                <h1 class="text-center" style="font-family: 'Coming Soon', cursive;">~Welcome~</h1>
 
 
                 <hr>
@@ -77,7 +77,7 @@
                      <p class="text-center text-muted" style="font-size: 13px; padding-top: 10px; ">Not registered? <a href="{% url 'register' %}"><br>What are you waiting for?</a></p>
                     </div>
 
-
+{% endblock content %}
         </div>
     <div>
 

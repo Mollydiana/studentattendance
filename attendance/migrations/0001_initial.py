@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('date', models.DateTimeField(auto_now_add=True)),
-                ('student', models.ForeignKey(related_name=b'attendancecount', to=settings.AUTH_USER_MODEL)),
+                ('person', models.ForeignKey(related_name=b'checkins', to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },

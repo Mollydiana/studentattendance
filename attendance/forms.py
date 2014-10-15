@@ -16,7 +16,7 @@ class EmailUserCreationForm(UserCreationForm):
         # but it sets a nicer error message than the ORM. See #13147.
         username = self.cleaned_data["username"]
         try:
-            Person.objects.get(username=username)
+            Person.objects.get(username="username")
         except Person.DoesNotExist:
             return username
         raise forms.ValidationError(
