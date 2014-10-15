@@ -85,6 +85,9 @@ USE_TZ = True
 
 DEFAULT_FROM_EMAIL = 'fred@f.com'
 
+LOGIN_REDIRECT_URL = 'teacher'
+LOGIN_URL = 'login' # given the string of login url page
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
