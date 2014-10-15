@@ -1,6 +1,6 @@
 import datetime
 from django.conf import settings
-
+from django.db.models import Max
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMultiAlternatives
 from django.db.models import Max
@@ -22,7 +22,7 @@ def student(request):
         return redirect('home')
     now = datetime.datetime.now()
     attendance = Person.attendancecount
-    mayor = attendance(Max('attendancecount'))
+    mayor = Person.objects.all().aggregate(Max('attendancecount'))
     return render(request, 'student.html', {
         'now': now,
         'mayor': mayor
@@ -34,7 +34,7 @@ def teacher(request):
         return redirect('home')
     now = datetime.datetime.now()
     attendance = Person.attendancecount
-    mayor = attendance(Max('attendancecount'))
+    mayor = Person.objects.all().aggregate(Max('attendancecount'))
     return render(request, 'teacher.html', {
         'now': now,
         'mayor': mayor
