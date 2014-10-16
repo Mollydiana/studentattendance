@@ -1,13 +1,27 @@
 {% extends 'base_template.html' %}
 {% block content %}
-    <form method="post" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
+    <div class="row" style="margin-top: 200px;">
 
-        <input type="submit" value="Log in">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="jumbotron text-center" style="padding-bottom: 40px;">
+
+                <input type="hidden" name="next" value="{{ teacher }}"/>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <br>
+                    <input style="font-size: 24px;" type="submit" value="Log in">
 
 
-    </form>
+                </form>
+                <br>
+                <p>Not a member? <a href="{% url 'register' %}">Register!</a></p>
 
-    <p>Not a member? <a href="{% url 'register' %}">Register!</a></p>
+                <div class="row">
+                    <p class="text-center text-muted" style="font-size: 13px; padding-top: 10px; ">Not registered? <a
+                            href="{% url 'register' %}"><br>What are you waiting for?</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
