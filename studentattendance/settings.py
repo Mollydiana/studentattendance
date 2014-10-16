@@ -85,7 +85,7 @@ USE_TZ = True
 
 DEFAULT_FROM_EMAIL = 'fred@f.com'
 
-LOGIN_REDIRECT_URL = 'teacher'
+LOGIN_REDIRECT_URL = 'profile'
 LOGIN_URL = 'login' # given the string of login url page
 
 # Static files (CSS, JavaScript, Images)

@@ -5,7 +5,7 @@ from django.db import models
 
 
 class Person(AbstractUser):
-    teacher = models.BooleanField(default=False)
+    teacher = models.BooleanField(default=True)
 
 
 class CheckIn(models.Model):
