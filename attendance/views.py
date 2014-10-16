@@ -1,15 +1,19 @@
 import datetime
+import json
 from django.conf import settings
+from django.core import serializers
 from django.db.models import Max
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMultiAlternatives
 from django.db.models import Max
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 
 # Create your views here.
-from attendance.forms import EmailUserCreationForm
-from attendance.models import Person
+from django.views.decorators.csrf import csrf_exempt
+from attendance.forms import EmailUserCreationForm, StudentCheckInForm
+from attendance.models import Person, Course, CheckIn
 
 
 def home(request):
@@ -24,9 +28,8 @@ def student(request):
     if not request.user.is_authenticated():
         return redirect('home')
     now = datetime.datetime.now()
-    attendance = Person.attendancecount
-    mayor = Person.objects.all().aggregate(Max('attendancecount'))
-    return render(request, 'student.html', {
+    mayor = Person.objects.all().aggregate(Max('check_ins'))
+    return render(request, 'profile.html', {
         'now': now,
         'mayor': mayor
     })
@@ -36,9 +39,8 @@ def teacher(request):
     if not request.user.is_authenticated():
         return redirect('home')
     now = datetime.datetime.now()
-    attendance = Person.attendancecount
-    mayor = Person.objects.all().aggregate(Max('attendancecount'))
-    return render(request, 'teacher.html', {
+    mayor = Person.objects.all().aggregate(Max('check_ins'))
+    return render(request, 'profile.html', {
         'now': now,
         'mayor': mayor
     })
@@ -57,10 +59,10 @@ def register(request):
             # msg = EmailMultiAlternatives("Welcome!", text_content, settings.DEFAULT_FROM_EMAIL, [user.email])
             # msg.attach_alternative(html_content, "text/html")
             # msg.send()
-            if user.teacher:
-                return redirect("teacher")
-            else:
-                return redirect("student")
+            # if user.teacher:
+            #     return redirect("teacher")
+            # else:
+            #     return redirect("student")
     else:
         form = EmailUserCreationForm()
 
@@ -68,5 +70,41 @@ def register(request):
         'form': form,
     })
 
+@login_required()
+def checkin(request):
+    student_check_in_form = None
+    if request.user.is_student:
+    #Check if student or teacher
+        student_check_in_form = StudentCheckInForm(student=request.user)
+        #Pass in student user to get classes for the particular student in form
+        if request.method == "POST":
+            student_check_in_form = StudentCheckInForm(request.POST)
+            if student_check_in_form.is_valid():
+                checkin = CheckIn.objects.create(
+                    student=request.user,
+                    class_name=Course.objects.get(
+                        pk=int(student_check_in_form.cleaned_data['classes'])
+                    )
+                )
+                if checkin:
+                    return redirect('home')
 
+    data = {'student_check_in_form': student_check_in_form}
+    return render(request, 'profile.html', data)
+
+
+@csrf_exempt
+def ajax_checkin(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if data and request.user.is_student:
+            checkin = CheckIn.objects.create(
+                    student=request.user,
+                    class_name=Course.objects.get(
+                        pk=int(data['class_id'])
+                    )
+                )
+            if checkin:
+                response = serializers.serialize('json', [checkin])
+                return HttpResponse(response, content_type='application/json')
 
