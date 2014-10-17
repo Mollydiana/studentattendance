@@ -85,9 +85,12 @@ USE_L10N = True
 USE_TZ = True
 
 DEFAULT_FROM_EMAIL = 'fred@f.com'
+<<<<<<< Updated upstream
 
 LOGIN_REDIRECT_URL = 'profile'
 LOGIN_URL = 'login' # given the string of login url page
+=======
+>>>>>>> Stashed changes
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
