@@ -1,3 +1,3 @@
 studentattendance
 =================
-[ ![Codeship Status for Mollydiana/studentattendance](https://codeship.io/projects/82bcbfa0-3874-0132-c37b-6a023c1e0863/status)](https://codeship.io/projects/42028)
+[ ![Codeship Status for Mollydiana/studentattendance](https://codeship.io/projects/a6b6cc90-387a-0132-3bf5-3e83918148ed/status)](https://codeship.io/projects/42040)
