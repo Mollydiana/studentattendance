@@ -9,6 +9,7 @@ from attendance.models import CheckIn, Profile
 def dropdown(request):
     return render(request, 'dropdown.html')
 
+
 def home(request):
     mayor = Profile.objects.order_by('-count')[0]
     user = request.user
@@ -76,4 +77,3 @@ def profile(request):
                     return render(request, 'home.html', data)
         data = {'message': 'Please check in', 'mayor': mayor, 'in_today': in_today}
         return render(request, 'home.html', data)
-
