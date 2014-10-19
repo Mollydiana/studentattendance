@@ -58,7 +58,7 @@ ROOT_URLCONF = 'studentattendance.urls'
 
 WSGI_APPLICATION = 'studentattendance.wsgi.application'
 
-AUTH_USER_MODEL = 'attendance.Person'
+AUTH_USER_MODEL = 'attendance.Profile'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

@@ -1,10 +1,16 @@
 {% extends 'base_template.html' %}
+
 {% block content %}
-    <ul>
-{#    trying to put student names in a listed table; failing#}
-    {% for student in user.objects.all %}
-    <li>{{ user.name }}</li>
-    {% endfor %}
-    </ul>
-    {{ mayor }}
+    <table class="table">
+            <th>Student Name</th>
+            <th>Checkin Times</th>
+            {% for checkin in attendance %}
+            <tr>
+                <td>{{ checkin.student }}</td>
+                <td>{{ checkin.time.month }}/{{ checkin.time.day }}/{{ checkin.time.year }} {{ checkin.time.time }}</td>
+            </tr>
+
+            {% endfor %}
+        </table>
+        <a type="submit" class="btn btn-default btn-md btn-block" href="{% url 'dropdown' %}">Logout</a>
 {% endblock %}

@@ -1,72 +1,79 @@
-import datetime
-from django.conf import settings
-from django.db.models import Max
+from datetime import datetime
 from django.contrib.auth.decorators import login_required
-from django.core.mail import EmailMultiAlternatives
-from django.db.models import Max
 from django.shortcuts import render, redirect
 
-
-# Create your views here.
 from attendance.forms import EmailUserCreationForm
-from attendance.models import Person
+from attendance.models import CheckIn, Profile
 
+
+def dropdown(request):
+    return render(request, 'dropdown.html')
 
 def home(request):
-    return render(request, 'home.html')
-
-def profile(request):
-    return render(request, 'profile.html')
-
-
-@login_required
-def student(request):
-    if not request.user.is_authenticated():
-        return redirect('home')
-    now = datetime.datetime.now()
-    attendance = Person.attendancecount
-    mayor = Person.objects.all().aggregate(Max('attendancecount'))
-    return render(request, 'student.html', {
-        'now': now,
-        'mayor': mayor
-    })
-
-@login_required
-def teacher(request):
-    if not request.user.is_authenticated():
-        return redirect('home')
-    now = datetime.datetime.now()
-    attendance = Person.attendancecount
-    mayor = Person.objects.all().aggregate(Max('attendancecount'))
-    return render(request, 'teacher.html', {
-        'now': now,
-        'mayor': mayor
-    })
+    mayor = Profile.objects.order_by('-count')[0]
+    user = request.user
+    user_check_ins = CheckIn.objects.filter(student__id=user.id)
+    in_today = 0
+    if request.method == 'POST':
+        user = request.user
+        check_in = CheckIn.objects.create(student=user)
+        check_in.save()
+        user.count += 1
+        user.save()
+        return redirect('profile')
+    else:
+        for checkin in user_check_ins:
+            if checkin.time.day == datetime.today().day:
+                in_today = 1
+                data = {'message': 'THANKS FOR CHECKIN THE FUCK IN', 'mayor': mayor, 'in_today': in_today}
+                return render(request, 'home.html', data)
+    data = {'message': 'CHECK THE FUCK IN', 'mayor': mayor, 'in_today': in_today}
+    return render(request, 'home.html', data)
 
 
 def register(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = EmailUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            user = form.save()
-            # user.email_user("Welcome!", "Thank you for signing up for our website.")
-            # text_content = 'Thank you for signing up for our website, {}'.format(user.username)
-            # html_content = '<h2>Thanks {} {} for signing up!</h2> <div>I hope you enjoy using our site. ' \
-            #                'You registered at {}.</div>'.format(user.first_name, user.last_name, user.date_joined)
-            # msg = EmailMultiAlternatives("Welcome!", text_content, settings.DEFAULT_FROM_EMAIL, [user.email])
-            # msg.attach_alternative(html_content, "text/html")
-            # msg.send()
-            if user.teacher:
-                return redirect("teacher")
-            else:
-                return redirect("student")
+            return redirect('login')
     else:
         form = EmailUserCreationForm()
-
-    return render(request, "registration/register.html", {
-        'form': form,
-    })
+    return render(request, "registration/register.html", {'form': form})
 
 
+@login_required
+def profile(request):
+    user = request.user
+    mayor = Profile.objects.order_by('-count')[0]
+    if user.teacher:
+        data = {
+            'attendance': CheckIn.objects.filter(time__lte=datetime.today()),
+            'mayor': mayor
+        }
+        return render(request, 'teacher.html', data)
+
+    else:
+        checkin_list = CheckIn.objects.filter(student=request.user)
+        data = {'checkin_list': checkin_list}
+        # return render(request, 'profile.html', data)
+        mayor = Profile.objects.order_by('-count')[0]
+        user = request.user
+        user_check_ins = CheckIn.objects.filter(student__id=user.id)
+        in_today = 0
+        if request.method == 'POST':
+            user = request.user
+            check_in = CheckIn.objects.create(student=user)
+            check_in.save()
+            user.count += 1
+            user.save()
+            return redirect('profile')
+        else:
+            for checkin in user_check_ins:
+                if checkin.time.day == datetime.today().day:
+                    in_today = 1
+                    data = {'message': 'Get back to work!', 'mayor': mayor, 'in_today': in_today}
+                    return render(request, 'home.html', data)
+        data = {'message': 'Please check in', 'mayor': mayor, 'in_today': in_today}
+        return render(request, 'home.html', data)
 

@@ -1,13 +1,15 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# Create your models here.
 
-
-class Person(AbstractUser):
-    teacher = models.BooleanField(default=True)
+class Profile(AbstractUser):
+    teacher = models.BooleanField(default=False)
+    count = models.IntegerField(default=0)
 
 
 class CheckIn(models.Model):
-    date = models.DateTimeField(auto_now_add=True)
-    person = models.ForeignKey(Person, related_name='checkins')
+    student = models.ForeignKey(Profile)
+    time = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return '{}'.format(self.student, self.time)

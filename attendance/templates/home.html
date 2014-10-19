@@ -1,1 +1,27 @@
 {% extends 'base_template.html' %}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    {% block title %}{% endblock title %}
+
+</head>
+<body>
+    {% block content %}
+
+    <div class="jumbotron">
+        <h1><em>{{ message }}</em></h1>
+        <h3>Current Class Mayor: {{ mayor }}</h3>
+    </div>
+
+    {% if user.is_authenticated and in_today == 0 %}
+    <form method="post" action=".">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-lg btn-block" value="check_in">Check In</button>
+    </form>
+    {% endif %}
+    <a type="submit" class="btn btn-default btn-md btn-block" href="{% url 'dropdown' %}">Logout</a>
+    {% endblock content %}
+</body>
+</html>
